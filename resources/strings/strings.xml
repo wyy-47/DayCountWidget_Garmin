@@ -31,6 +31,8 @@
     <string id="dateOne">DateSaved</string>
     <string id="dateTwo">DateSaved2</string>
     <string id="dateThree">DateSaved3</string>
+    <string id="dateNew">DateNew</string>
+    <string id="dateNew2">Saved!</string>
 
     <!-- Spcae Full -->
     <string id="fullMsg1">Space Full!</string>

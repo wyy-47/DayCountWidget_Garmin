@@ -22,7 +22,7 @@ class NewEvent extends WatchUi.Picker {
             :locY=>WatchUi.LAYOUT_VALIGN_BOTTOM, :color=>Graphics.COLOR_WHITE});
         var separator = new WatchUi.Text({:text=>$.Rez.Strings.dateSeparator, :locX=>WatchUi.LAYOUT_HALIGN_CENTER,
             :locY=>WatchUi.LAYOUT_VALIGN_CENTER, :color=>Graphics.COLOR_WHITE});
-        Picker.initialize({:title=>title, :pattern=>[new $.WordFactory(months, {}), separator, new $.NewEventFactory(1, 31, 1, {}),
+        Picker.initialize({:title=>title, :pattern=>[new $.NewEventFactory(1, 12, 1, {}), separator, new $.NewEventFactory(1, 31, 1, {}),
             separator, new $.NewEventFactory(18, 26, 1, {:font=>Graphics.FONT_SYSTEM_NUMBER_MEDIUM})]});
 
         // if ((Storage.getValue("dateThree") != null)){
@@ -58,23 +58,32 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
     //! @param values The values chosen in the picker
     //! @return true if handled, false otherwise
     public function onAccept(values as Array<Number?>) as Boolean {
+        System.println(values);
         var separator = WatchUi.loadResource($.Rez.Strings.dateSeparator) as String;
-        var monthResource = values[0];
-        if (monthResource != null) {
-            var month = WatchUi.loadResource(monthResource as Symbol) as String;
-            var day = values[2];
-            var year = "20"+values[4];
-            if ((day != null) && (year != null)) {
-                var date = month + separator + day + separator + year;
-                if (Storage.getValue("dateOne") == null){
-                    Storage.setValue("dateOne", date);
-                }else if (Storage.getValue("dateTwo") == null){
-                    Storage.setValue("dateTwo", date);
-                }else if (Storage.getValue("dateThree") == null){
-                    Storage.setValue("dateThree", date);
-                }
-            }    
+        var month = values[0];
+        var day = values[2];
+        if (values[0]<10){
+            month = "0" + values[0];
         }
+        if (values[2] < 10){
+            day = "0" + values[2];
+        }
+        var year = "20"+values[4];
+
+        if ((day != null) && (year != null)) {
+            var date = month + separator + day + separator + year;
+            if (Storage.getValue("dateOne") == null){
+                Storage.setValue("dateOne", date);
+                Storage.setValue("dateNew", date);
+            }else if (Storage.getValue("dateTwo") == null){
+                Storage.setValue("dateTwo", date);
+                Storage.setValue("dateNew", date);
+            }else if (Storage.getValue("dateThree") == null){
+                Storage.setValue("dateThree", date);
+                Storage.setValue("dateNew", date);
+            }
+        }    
+        
         WatchUi.pushView(new $.ConfirmationView(), new $.ConfirmationDelegate(), WatchUi.SLIDE_IMMEDIATE);
         return true;
     }

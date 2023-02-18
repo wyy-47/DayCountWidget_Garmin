@@ -10,58 +10,27 @@ class ConfirmationView extends WatchUi.View{
     }
 
     function onLayout(dc as Dc) as Void {
-        if(Storage.getValue("dateThree")!= null){
-            setLayout(Rez.Layouts.LayoutThree(dc));
-            System.println("confirmation layout 3");
-        }else if (Storage.getValue("dateTwo")!= null) {
-            setLayout(Rez.Layouts.LayoutTwo(dc));
-            System.println("confirmation layout 2");
-        }else {
-            setLayout(Rez.Layouts.LayoutOne(dc));
-            System.println("confirmation layout 1");
-        }
+        setLayout(Rez.Layouts.LayoutDateNew(dc));
     }
 
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        var date = findDrawableById("dateThree") as Text;
-       
-        var prop = Storage.getValue("dateThree");
-        System.println(prop);
+        var date = findDrawableById("dateNew") as Text;
+        var prop = Storage.getValue("dateNew");
+        
         //date.setText(prop);
         if (prop instanceof String) {
-            System.println("instance of");
             date.setText(prop);
             date.setColor(Graphics.COLOR_WHITE);
         }
-
-        // if (Storage.getValue("dateOne") == null){
-        //             Storage.setValue("dateOne", date);
-        //         }else if (Storage.getValue("dateTwo") == null){
-        //             Storage.setValue("dateTwo", date);
-        //         }else if (Storage.setValue("dateThree") == null){
-        //             Storage.setValue("dateThree", date)
-        //         }else{
-
-        //         }
-
-        // // set the color of each Text object
-        // prop = Storage.getValue("color");
-        // if (prop instanceof Number) {
-        //     date.setColor(prop);
-        // }
     }
 
     // Update the view
     function onUpdate(dc as Dc) as Void {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.clear();
-
-        dc.drawText(dc.getWidth()/2, dc.getHeight()/2, Graphics.FONT_SMALL, "Saved!", Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     // Called when this View is removed from the screen. Save the
@@ -79,12 +48,6 @@ class ConfirmationDelegate extends WatchUi.BehaviorDelegate {
         BehaviorDelegate.initialize();
     }
 
-    // //! Handle the menu event
-    // //! @return true if handled, false otherwise
-    // public function onMenu() as Boolean {
-    //     return pushPicker();
-    // }
-
     //! Handle a button being pressed and released
     //! @param evt The key event that occurred
     //! @return true if handled, false otherwise
@@ -100,6 +63,7 @@ class ConfirmationDelegate extends WatchUi.BehaviorDelegate {
     //! Push a new picker view
     //! @return true if handled, false otherwise
     public function pushPicker() as Boolean {
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         return true;
     }

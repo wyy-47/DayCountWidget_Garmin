@@ -19,7 +19,7 @@ class DayCountApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as Array<Views or InputDelegates>? {
-        return [new $.Rez.Menus.MainMenu(), new DayCountView() ] as Array<Views or InputDelegates>;
+        return [new $.Rez.Menus.MainMenu(), new DayCountView()] as Array<Views or InputDelegates>;
     }
 
 }

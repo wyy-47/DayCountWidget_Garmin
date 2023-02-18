@@ -1,6 +1,9 @@
-import Toybox.WatchUi;
 import Toybox.Application.Storage;
+import Toybox.Graphics;
+import Toybox.Lang;
+import Toybox.WatchUi;
 import Toybox.System;
+import Toybox.Time;
 
 class Event1View extends WatchUi.View{
     function initialize(){
@@ -8,20 +11,17 @@ class Event1View extends WatchUi.View{
     }
 
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.LayoutE1(dc));
+        setLayout(Rez.Layouts.LayoutDateNew(dc));
     }
 
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        var date = findDrawableById("dateThree") as Text;
-       
-        var prop = Storage.getValue("dateThree");
-        System.println(prop);
+        var date = findDrawableById("dateNew") as Text;
+        var prop = Storage.getValue("dateNew");
         //date.setText(prop);
         if (prop instanceof String) {
-            System.println("instance of");
             date.setText(prop);
             date.setColor(Graphics.COLOR_WHITE);
         }
@@ -31,10 +31,7 @@ class Event1View extends WatchUi.View{
     function onUpdate(dc as Dc) as Void {
         // Call the parent onUpdate function to redraw the layout
         View.onUpdate(dc);
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.clear();
-
-        dc.drawText(dc.getWidth()/2, dc.getHeight()/2, Graphics.FONT_SMALL, "Saved!", Graphics.TEXT_JUSTIFY_CENTER);
+        System.println(Time.now());
     }
 
     // Called when this View is removed from the screen. Save the
@@ -42,4 +39,34 @@ class Event1View extends WatchUi.View{
     // memory.
     function onHide() as Void {
     }
+}
+
+//! Input handler for the main view
+class Event1Delegate extends WatchUi.BehaviorDelegate {
+
+    //! Constructor
+    public function initialize() {
+        BehaviorDelegate.initialize();
+    }
+
+    //! Handle a button being pressed and released
+    //! @param evt The key event that occurred
+    //! @return true if handled, false otherwise
+    public function onKey(evt as KeyEvent) as Boolean {
+        var key = evt.getKey();
+        if ((WatchUi.KEY_ESC == key) || (WatchUi.KEY_ENTER == key)) {
+            return pushPicker();
+        }
+        return false;
+
+    }
+
+    //! Push a new picker view
+    //! @return true if handled, false otherwise
+    public function pushPicker() as Boolean {
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        return true;
+    }
+
 }

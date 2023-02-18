@@ -1,0 +1,5 @@
+<layout id="LayoutDateNew">
+    <!--<bitmap id="id_monkey" x="center" y="center" filename="../drawables/monkey.png" />-->
+    <label id="dateNew" x="center" y="center" text="@Strings.dateNew" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
+    <label id="dateNew2" x="center" y="100" text="@Strings.dateNew2" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
+</layout>
