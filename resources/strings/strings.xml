@@ -1,0 +1,43 @@
+<strings>
+    <string id="AppName">DayCount</string>
+
+    <!-- MainPage Menu -->
+    <string id="MainMenuTitle">Main Menu</string>
+    <string id="MenuLabel1">Saved Events</string>
+    <string id="MenuLabel2">New Event</string>
+
+    <!-- First Picker -->
+    <string id="picker">Options</string>
+    <string id="PickerSavedEvents">Saved Events</string>
+    <string id="pickerNewEvent">New Event</string>
+
+    <!-- Date Picker -->
+    <string id="datePickerTitle">MM-DD-YY</string>
+    <string id="dateSeparator">-</string>
+    <string id="month01">Jan</string>
+    <string id="month02">Feb</string>
+    <string id="month03">Mar</string>
+    <string id="month04">Apr</string>
+    <string id="month05">May</string>
+    <string id="month06">Jun</string>
+    <string id="month07">Jul</string>
+    <string id="month08">Aug</string>
+    <string id="month09">Sep</string>
+    <string id="month10">Oct</string>
+    <string id="month11">Nov</string>
+    <string id="month12">Dec</string>
+
+    <!-- Date Confirmation -->
+    <string id="dateOne">DateSaved</string>
+    <string id="dateTwo">DateSaved2</string>
+    <string id="dateThree">DateSaved3</string>
+
+    <!-- Spcae Full -->
+    <string id="fullMsg1">Space Full!</string>
+    <string id="fullMsg2">change or delete</string>
+
+    <!-- Event info -->
+    <string id="E1_1">Edit?</string>
+
+
+</strings>
