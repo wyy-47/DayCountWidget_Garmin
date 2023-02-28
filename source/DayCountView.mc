@@ -16,7 +16,6 @@ class DayCountView extends WatchUi.MenuInputDelegate {
         if (item == :Item1) {
             System.println("Item 1");
             var today = new Time.Moment(Time.today().value());
-            System.println("this is today: " + today);
 
             var sub1 = Storage.getValue("dateOne");
             var sub2 = Storage.getValue("dateTwo");
@@ -24,37 +23,78 @@ class DayCountView extends WatchUi.MenuInputDelegate {
             var countedDays1;
             var countedDays2;
             var countedDays3;
+            var mm, dd, yr, eMoment;
+            var leftOver, i, options;
 
             if(sub1 == null){
                 sub1 = "Empty";
                 countedDays1 = null;
             }else{
-                var i = sub1.find("-");
-                var month1 = sub1.substring(0, i).toLongWithBase(10).toNumber();
-                var tRest = sub1.substring(i+1, sub1.length());
-                i = tRest.find("-");
-                var day1 = tRest.substring(0, i).toLongWithBase(10).toNumber();
-                var year1 = tRest.substring(i+1, sub1.length()).toLongWithBase(10).toNumber();
-                var options1 = {:year => year1, :month => month1, :day => day1};
-                System.println(options1);
-                var mom1 = Gregorian.moment(options1);
-                var info1 = Gregorian.info(mom1, Time.FORMAT_SHORT);
-                countedDays1 = today.subtract(mom1).value();
-                countedDays1 = (days/86400).toString();
+                i = sub1.find("-");
+                mm = sub1.substring(0, i).toLongWithBase(10).toNumber();
+                leftOver = sub1.substring(i+1, sub1.length());
+                i = leftOver.find("-");
+                dd = leftOver.substring(0, i).toLongWithBase(10).toNumber();
+                yr = leftOver.substring(i+1, sub1.length()).toLongWithBase(10).toNumber();
+                options = {:year => yr, :month => mm, :day => dd};
+                System.println(options);
+                eMoment = Gregorian.moment(options);
+                // var info1 = Gregorian.info(mom1, Time.FORMAT_SHORT);
+                countedDays1 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                //countedDays1 = (days/86400).toString();
 
                 System.println("this is the subtraction: " + countedDays1);
-                System.println(format("$1$-$2$-$3$", [
-                    info1.year.format("%04u"),
-                    info1.month.format("%02u"),
-                    info1.day.format("%02u")
-                ]));
+            }
+
+            if(sub2 == null){
+                sub2 = "Empty";
+                countedDays2 = null;
+                System.println("sub2 empty is true");
+            }else{
+                System.println("sub2 empty is not true");
+                i = sub2.find("-");
+                mm = sub2.substring(0, i).toLongWithBase(10).toNumber();
+                leftOver = sub2.substring(i+1, sub2.length());
+                i = leftOver.find("-");
+                dd = leftOver.substring(0, i).toLongWithBase(10).toNumber();
+                yr = leftOver.substring(i+1, sub2.length()).toLongWithBase(10).toNumber();
+                options = {:year => yr, :month => mm, :day => dd};
+                System.println(options);
+                eMoment = Gregorian.moment(options);
+                // var info1 = Gregorian.info(mom1, Time.FORMAT_SHORT);
+                countedDays2 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                //countedDays1 = (days/86400).toString();
+
+                System.println("this is the subtraction: " + countedDays1);
+            }
+
+            if(sub3 == null){
+                sub3 = "Empty";
+                countedDays3 = null;
+                System.println("sub3 empty is true");
+            }else{
+                System.println("sub3 empty is not true");
+                i = sub3.find("-");
+                mm = sub3.substring(0, i).toLongWithBase(10).toNumber();
+                leftOver = sub3.substring(i+1, sub3.length());
+                i = leftOver.find("-");
+                dd = leftOver.substring(0, i).toLongWithBase(10).toNumber();
+                yr = leftOver.substring(i+1, sub3.length()).toLongWithBase(10).toNumber();
+                options = {:year => yr, :month => mm, :day => dd};
+                System.println(options);
+                eMoment = Gregorian.moment(options);
+                // var info1 = Gregorian.info(mom1, Time.FORMAT_SHORT);
+                countedDays3 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                //countedDays1 = (days/86400).toString();
+
+                System.println("this is the subtraction: " + countedDays1);
             }
 
             var menu = new WatchUi.Menu2({:title=>"Saved Events"});
             // Add menu items for demonstrating toggles, checkbox and icon menu items
             menu.addItem(new WatchUi.MenuItem(sub1, countedDays1, "e1", null));
-            menu.addItem(new WatchUi.MenuItem("Event 2", sub2, "e2", null));
-            menu.addItem(new WatchUi.MenuItem("Event 3", sub3, "e3", null));
+            menu.addItem(new WatchUi.MenuItem(sub2, countedDays2, "e2", null));
+            menu.addItem(new WatchUi.MenuItem(sub3, countedDays3, "e3", null));
             //menu.addItem(new WatchUi.MenuItem(testYear, null, null, null));
             WatchUi.pushView(menu, new $.SavedEventsDelegate(), WatchUi.SLIDE_UP);
         } 
@@ -68,12 +108,8 @@ class DayCountView extends WatchUi.MenuInputDelegate {
         }
     }
 
-    public function onKey(evt as KeyEvent) as Boolean {
-        var key = evt.getKey();
-        if (WatchUi.KEY_ESC == key) {
-            System.println("on main page exit");
-            return System.exit();
-        }
-        return false;
+    function onKey(keyEvent) {
+        System.println(keyEvent.getKey()); // e.g. KEY_MENU = 7
+        return true;
     }
 }

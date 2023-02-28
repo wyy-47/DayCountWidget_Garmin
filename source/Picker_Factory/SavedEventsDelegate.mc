@@ -26,11 +26,14 @@ class SavedEventsDelegate extends WatchUi.Menu2InputDelegate {
         else if (id.equals("e2")){
             Storage.setValue("selectedEvent", "dateTwo");
             System.println("event 2 selected");
+            WatchUi.pushView(menu, new $.EventMenuDelegate(), WatchUi.SLIDE_UP);
         }
         else if (id.equals("e2")){
             Storage.setValue("selectedEvent", "dateThree");
             System.println("event 3 selected");
+            WatchUi.pushView(menu, new $.EventMenuDelegate(), WatchUi.SLIDE_UP);
         }
+        
     }
 
     //! Handle the back key being pressed

@@ -49,6 +49,7 @@ class DeleteDelegate extends WatchUi.BehaviorDelegate {
         if (WatchUi.KEY_ENTER == key) {
             var location = Storage.getValue("selectedEvent");
             Storage.setValue(location, null);
+            System.println("this is in delete: " + location);
             return pushPicker();
         } else if (WatchUi.KEY_ESC == key){
             WatchUi.popView(SLIDE_RIGHT);
@@ -59,17 +60,9 @@ class DeleteDelegate extends WatchUi.BehaviorDelegate {
     //! Push a new picker view
     //! @return true if handled, false otherwise
     public function pushPicker() as Boolean {
-        System.println(Storage.getValue("dateOne"));
-        var sub1 = Storage.getValue("dateOne");
-        var sub2 = Storage.getValue("dateTwo");
-        var sub3 = Storage.getValue("dateThree");
-        var menu = new WatchUi.Menu2({:title=>"Saved Events"});
-        // Add menu items for demonstrating toggles, checkbox and icon menu items
-        menu.addItem(new WatchUi.MenuItem(sub1, days.toString(), "e1", null));
-        menu.addItem(new WatchUi.MenuItem("Event 2", sub2, "e2", null));
-        menu.addItem(new WatchUi.MenuItem("Event 3", sub3, "e3", null));
-            //menu.addItem(new WatchUi.MenuItem(testYear, null, null, null));
-        WatchUi.pushView(menu, new $.SavedEventsDelegate(), WatchUi.SLIDE_UP);
+        Storage.setValue("selectedEvent", null);
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         return true;
     }
 

@@ -9,7 +9,7 @@ class NewEvent extends WatchUi.Picker {
 
     //! Constructor
     public function initialize() {
-        Storage.setValue("dateOne", null);
+        //Storage.setValue("dateOne", null);
         var months = [$.Rez.Strings.month01, $.Rez.Strings.month02, $.Rez.Strings.month03,
                       $.Rez.Strings.month04, $.Rez.Strings.month05, $.Rez.Strings.month06,
                       $.Rez.Strings.month07, $.Rez.Strings.month08, $.Rez.Strings.month09,
@@ -76,7 +76,13 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
 
         if ((day != null) && (year != null)) {
             var date = month + separator + day + separator + year;
-            if (Storage.getValue("dateOne") == null){
+            var eSelected = Storage.getValue("selectedEvent");
+            if (eSelected != null){
+                Storage.setValue("dateNew", date);
+                Storage.setValue(eSelected, date);
+                Storage.setValue("selectedEvent", null);
+            }
+            else if (Storage.getValue("dateOne") == null){
                 Storage.setValue("dateOne", date);
                 Storage.setValue("dateNew", date);
             }else if (Storage.getValue("dateTwo") == null){
