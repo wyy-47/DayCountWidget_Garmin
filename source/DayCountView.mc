@@ -41,17 +41,14 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 eMoment = Gregorian.moment(options);
                 // var info1 = Gregorian.info(mom1, Time.FORMAT_SHORT);
                 countedDays1 = (today.subtract(eMoment).value()/86400).toString() + " days";
-                //countedDays1 = (days/86400).toString();
 
-                System.println("this is the subtraction: " + countedDays1);
+                System.println("this is the subtraction1: " + countedDays1);
             }
 
             if(sub2 == null){
                 sub2 = "Empty";
                 countedDays2 = null;
-                System.println("sub2 empty is true");
             }else{
-                System.println("sub2 empty is not true");
                 i = sub2.find("-");
                 mm = sub2.substring(0, i).toLongWithBase(10).toNumber();
                 leftOver = sub2.substring(i+1, sub2.length());
@@ -61,19 +58,15 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 options = {:year => yr, :month => mm, :day => dd};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
-                // var info1 = Gregorian.info(mom1, Time.FORMAT_SHORT);
                 countedDays2 = (today.subtract(eMoment).value()/86400).toString() + " days";
-                //countedDays1 = (days/86400).toString();
 
-                System.println("this is the subtraction: " + countedDays1);
+                System.println("this is the subtraction2: " + countedDays1);
             }
 
             if(sub3 == null){
                 sub3 = "Empty";
                 countedDays3 = null;
-                System.println("sub3 empty is true");
             }else{
-                System.println("sub3 empty is not true");
                 i = sub3.find("-");
                 mm = sub3.substring(0, i).toLongWithBase(10).toNumber();
                 leftOver = sub3.substring(i+1, sub3.length());
@@ -83,11 +76,9 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 options = {:year => yr, :month => mm, :day => dd};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
-                // var info1 = Gregorian.info(mom1, Time.FORMAT_SHORT);
                 countedDays3 = (today.subtract(eMoment).value()/86400).toString() + " days";
-                //countedDays1 = (days/86400).toString();
 
-                System.println("this is the subtraction: " + countedDays1);
+                System.println("this is the subtraction3: " + countedDays1);
             }
 
             var menu = new WatchUi.Menu2({:title=>"Saved Events"});
