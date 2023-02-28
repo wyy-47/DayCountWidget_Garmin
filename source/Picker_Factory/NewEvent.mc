@@ -1,19 +1,15 @@
-//
-// Copyright 2015-2021 by Garmin Ltd. or its subsidiaries.
-// Subject to Garmin SDK License Agreement and Wearables
-// Application Developer Agreement.
-//
-
 import Toybox.Application.Storage;
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.WatchUi;
+using Toybox.Time.Gregorian;
 
 //! Picker that allows the user to choose a date
 class NewEvent extends WatchUi.Picker {
 
     //! Constructor
     public function initialize() {
+        Storage.setValue("dateOne", null);
         var months = [$.Rez.Strings.month01, $.Rez.Strings.month02, $.Rez.Strings.month03,
                       $.Rez.Strings.month04, $.Rez.Strings.month05, $.Rez.Strings.month06,
                       $.Rez.Strings.month07, $.Rez.Strings.month08, $.Rez.Strings.month09,
@@ -62,6 +58,14 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
         var separator = WatchUi.loadResource($.Rez.Strings.dateSeparator) as String;
         var month = values[0];
         var day = values[2];
+        // var options = {
+        //     :year => 2000+values[4],
+        //     :month => values[0],
+        //     :day => values[2]
+        // };
+        // var pickedDate = Gregorian.moment(options);
+        // var info = Gregorian.info(pickedDate, Time.FORMAT_SHORT);
+        // System.println("this is the input month: " + info.month.format("%02u"));
         if (values[0]<10){
             month = "0" + values[0];
         }

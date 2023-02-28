@@ -8,3 +8,9 @@ using Toybox.WatchUi;
         GlanceView.initialize();
     }
 }
+
+class dayCountGlanceViewDelegate extends WatchUi.GlanceViewDelegate{
+    function initialize(){
+        GlanceViewDelegate.initialize();
+    }
+}

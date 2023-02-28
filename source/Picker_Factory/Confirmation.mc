@@ -57,14 +57,13 @@ class ConfirmationDelegate extends WatchUi.BehaviorDelegate {
             return pushPicker();
         }
         return false;
-
     }
 
     //! Push a new picker view
     //! @return true if handled, false otherwise
     public function pushPicker() as Boolean {
-        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        WatchUi.popView(WatchUi.SLIDE_UP);
+        WatchUi.pushView(new $.Rez.Menus.MainMenu(), new DayCountView(), WatchUi.SLIDE_UP);
         return true;
     }
 

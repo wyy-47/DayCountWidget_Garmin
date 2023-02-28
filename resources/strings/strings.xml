@@ -41,5 +41,8 @@
     <!-- Event info -->
     <string id="E1_1">Edit?</string>
 
+    <!-- Delete Confirmation -->
+    <string id="delete">Delete?</string>
+
 
 </strings>
