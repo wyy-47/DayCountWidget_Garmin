@@ -17,5 +17,5 @@ Day counting widget for Garmin API 4.1.0+, this was wrote for personal use, so o
 5. Find a way to update teh glance once a day?
 
 ## Acknowledgement 
-The icon is from .
+The icon is from <a href="https://www.flaticon.com/free-icons/emotion" title="emotion icons">Emotion icons created by Baianat - Flaticon</a>.
 Some sample codes from the API package was modified and used.
