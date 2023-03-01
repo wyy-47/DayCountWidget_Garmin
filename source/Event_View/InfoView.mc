@@ -3,27 +3,48 @@ import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.System;
+using Toybox.Math;
 
-class ConfirmationView extends WatchUi.View{
+class InfoView extends WatchUi.View{
     function initialize(){
         View.initialize();
     }
 
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.LayoutDateNew(dc));
+        setLayout(Rez.Layouts.LayoutSelected(dc));
     }
 
     // Called when this View is brought to the foreground. Restore
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() as Void {
-        var date = findDrawableById("dateNew") as Text;
-        var prop = Storage.getValue("dateNew");
-        //date.setText(prop);
-        if (prop instanceof String) {
-            date.setText(prop);
-            date.setColor(Graphics.COLOR_WHITE);
+        var selected = Storage.getValue("selectedEvent");
+        var date, prop;
+        var dSelected = 0;
+        date = findDrawableById("selectedEvent") as Text;
+        if (Storage.getValue(selected) != null){
+            prop = Storage.getValue(selected); 
+        }else{
+            prop = "Empty";
         }
+        date.setText(prop);
+        date.setColor(Graphics.COLOR_WHITE);
+        
+        if(selected.equals("dateOne")){
+            dSelected = Storage.getValue("cDays1");
+        } else if(selected.equals("dateTwo")){
+            dSelected = Storage.getValue("cDays2");
+        } else if(selected.equals("dateThree")){
+            dSelected = Storage.getValue("cDays3");
+        }
+
+        var weeks, months, yrs;
+
+        if(dSelected > 7){
+            weeks = Math.floor(dSelected / 7) + " weeks " + (dSelected%7) + "days";
+            System.println("this is attempted weeks: " + weeks);
+        } 
+
     }
 
     // Update the view
@@ -40,7 +61,7 @@ class ConfirmationView extends WatchUi.View{
 }
 
 //! Input handler for the main view
-class ConfirmationDelegate extends WatchUi.BehaviorDelegate {
+class InfoDelegate extends WatchUi.BehaviorDelegate {
 
     //! Constructor
     public function initialize() {
@@ -52,7 +73,7 @@ class ConfirmationDelegate extends WatchUi.BehaviorDelegate {
     //! @return true if handled, false otherwise
     public function onKey(evt as KeyEvent) as Boolean {
         var key = evt.getKey();
-        if ((WatchUi.KEY_ESC == key) || (WatchUi.KEY_ENTER == key)) {
+        if (WatchUi.KEY_ESC == key) {
             return pushPicker();
         }
         return false;
@@ -61,7 +82,6 @@ class ConfirmationDelegate extends WatchUi.BehaviorDelegate {
     //! Push a new picker view
     //! @return true if handled, false otherwise
     public function pushPicker() as Boolean {
-        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         return true;
     }

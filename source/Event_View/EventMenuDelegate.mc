@@ -20,6 +20,9 @@ class EventMenuDelegate extends WatchUi.Menu2InputDelegate {
         else if (id.equals("delete")){
             System.println("delete selected");
             WatchUi.pushView(new $.DeleteView(), new $.DeleteDelegate(), WatchUi.SLIDE_UP);
+        } else if (id.equals("info")){
+            System.println("infoPage selected");
+            WatchUi.pushView(new $.InfoView(), new $.InfoDelegate(), WatchUi.SLIDE_UP);
         }
     }
 

@@ -20,10 +20,8 @@ class DayCountView extends WatchUi.MenuInputDelegate {
             var sub1 = Storage.getValue("dateOne");
             var sub2 = Storage.getValue("dateTwo");
             var sub3 = Storage.getValue("dateThree");
-            var countedDays1;
-            var countedDays2;
-            var countedDays3;
-            var mm, dd, yr, eMoment;
+            var countedDays1, countedDays2, countedDays3;
+            var mm, dd, yr, eMoment, countedDays;
             var leftOver, i, options;
 
             if(sub1 == null){
@@ -40,11 +38,12 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 System.println(options);
                 eMoment = Gregorian.moment(options);
                 // var info1 = Gregorian.info(mom1, Time.FORMAT_SHORT);
+                countedDays = today.subtract(eMoment).value()/86400;
+                Storage.setValue("cDays1", countedDays);
                 if (eMoment.greaterThan(today)){
-                    System.println("in countdown");
-                    countedDays1 = "In " + (today.subtract(eMoment).value()/86400).toString() + " days";
+                    countedDays1 = "In " + countedDays.toString() + " days";
                 }else{
-                    countedDays1 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                    countedDays1 = countedDays.toString() + " days";
                 }
 
                 System.println("this is the subtraction1: " + countedDays1);
@@ -63,11 +62,12 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 options = {:year => yr, :month => mm, :day => dd};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
+                countedDays = today.subtract(eMoment).value()/86400;
+                Storage.setValue("cDays2", countedDays);
                 if (eMoment.greaterThan(today)){
-                    System.println("in countdown");
-                    countedDays2 = "In " + (today.subtract(eMoment).value()/86400).toString() + " days";
+                    countedDays2 = "In " + countedDays.toString() + " days";
                 }else{
-                    countedDays2 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                    countedDays2 = countedDays.toString() + " days";
                 }
 
                 System.println("this is the subtraction2: " + countedDays1);
@@ -86,11 +86,12 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 options = {:year => yr, :month => mm, :day => dd};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
+                countedDays = today.subtract(eMoment).value()/86400;
+                Storage.setValue("cDays3", countedDays);
                 if (eMoment.greaterThan(today)){
-                    System.println("in countdown");
-                    countedDays3 = "In " + (today.subtract(eMoment).value()/86400).toString() + " days";
+                    countedDays3 = "In " + countedDays.toString() + " days";
                 }else{
-                    countedDays3 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                    countedDays3 = countedDays.toString() + " days";
                 }
 
                 System.println("this is the subtraction3: " + countedDays1);

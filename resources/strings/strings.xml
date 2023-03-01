@@ -39,7 +39,8 @@
     <string id="fullMsg2">change or delete</string>
 
     <!-- Event info -->
-    <string id="E1_1">Edit?</string>
+    <string id="selectedEvent">selected</string>
+    <string id="infoDays">selected</string>
 
     <!-- Delete Confirmation -->
     <string id="delete">Delete?</string>
