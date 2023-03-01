@@ -58,11 +58,11 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
         var separator = WatchUi.loadResource($.Rez.Strings.dateSeparator) as String;
         var month = values[0];
         var day = values[2];
-        // var options = {
-        //     :year => 2000+values[4],
-        //     :month => values[0],
-        //     :day => values[2]
-        // };
+        var options = {
+            "yr" => 2000+values[4],
+            "mm" => values[0],
+            "dd" => values[2]
+        };
         // var pickedDate = Gregorian.moment(options);
         // var info = Gregorian.info(pickedDate, Time.FORMAT_SHORT);
         // System.println("this is the input month: " + info.month.format("%02u"));
@@ -79,17 +79,17 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
             var eSelected = Storage.getValue("selectedEvent");
             if (eSelected != null){
                 Storage.setValue("dateNew", date);
-                Storage.setValue(eSelected, date);
+                Storage.setValue(eSelected, options);
                 Storage.setValue("selectedEvent", null);
             }
             else if (Storage.getValue("dateOne") == null){
-                Storage.setValue("dateOne", date);
+                Storage.setValue("dateOne", options);
                 Storage.setValue("dateNew", date);
             }else if (Storage.getValue("dateTwo") == null){
-                Storage.setValue("dateTwo", date);
+                Storage.setValue("dateTwo", options);
                 Storage.setValue("dateNew", date);
             }else if (Storage.getValue("dateThree") == null){
-                Storage.setValue("dateThree", date);
+                Storage.setValue("dateThree", options);
                 Storage.setValue("dateNew", date);
             }
         }    

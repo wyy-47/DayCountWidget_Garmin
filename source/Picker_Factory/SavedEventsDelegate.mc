@@ -18,6 +18,7 @@ class SavedEventsDelegate extends WatchUi.Menu2InputDelegate {
         // Add menu items for demonstrating toggles, checkbox and icon menu items
         menu.addItem(new WatchUi.MenuItem("Info", null, "info", null));
         menu.addItem(new WatchUi.MenuItem("Edit", null, "edit", null));
+        menu.addItem(new WatchUi.MenuItem("Set Glance", null, "glance", null));
         menu.addItem(new WatchUi.MenuItem("Delete", null, "delete", null));
         if (id.equals("e1")){
             System.println("event 1 selected");

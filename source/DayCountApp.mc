@@ -22,9 +22,9 @@ class DayCountApp extends Application.AppBase {
         return [new $.Rez.Menus.MainMenu(), new DayCountView()] as Array<Views or InputDelegates>;
     }
 
-    // function getGlanceView() as Array<GlanceView>?{
-    //     return [new dayCountGlanceView()] as Array<GlanceView>;
-    // }
+    function getGlanceView(){
+        return [new dayCountGlanceView()];
+    }
 
 }
 

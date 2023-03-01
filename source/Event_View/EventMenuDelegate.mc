@@ -2,6 +2,7 @@ import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.System;
+import Toybox.Application.Storage;
 
 //! This is the menu input delegate for the main menu of the application
 class EventMenuDelegate extends WatchUi.Menu2InputDelegate {
@@ -16,13 +17,16 @@ class EventMenuDelegate extends WatchUi.Menu2InputDelegate {
         if (id.equals("edit")){
             System.println("edit selected");
             WatchUi.pushView(new $.NewEvent(), new $.NewEventDelegate(), WatchUi.SLIDE_UP);
-        }
-        else if (id.equals("delete")){
+        }else if (id.equals("delete")){
             System.println("delete selected");
             WatchUi.pushView(new $.DeleteView(), new $.DeleteDelegate(), WatchUi.SLIDE_UP);
         } else if (id.equals("info")){
             System.println("infoPage selected");
             WatchUi.pushView(new $.InfoView(), new $.InfoDelegate(), WatchUi.SLIDE_UP);
+        } else if (id.equals("glance")){
+            var location = Storage.getValue("selectedEvent");
+            var gDate = Storage.getValue(location);
+            Storage.setValue("glance", gDate);
         }
     }
 

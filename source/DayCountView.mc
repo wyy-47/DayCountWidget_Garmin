@@ -21,25 +21,18 @@ class DayCountView extends WatchUi.MenuInputDelegate {
             var sub2 = Storage.getValue("dateTwo");
             var sub3 = Storage.getValue("dateThree");
             var countedDays1, countedDays2, countedDays3;
-            var mm, dd, yr, eMoment, countedDays;
-            var leftOver, i, options;
+            var eMoment, countedDays, info, options;
 
             if(sub1 == null){
                 sub1 = "Empty";
                 countedDays1 = null;
             }else{
-                i = sub1.find("-");
-                mm = sub1.substring(0, i).toLongWithBase(10).toNumber();
-                leftOver = sub1.substring(i+1, sub1.length());
-                i = leftOver.find("-");
-                dd = leftOver.substring(0, i).toLongWithBase(10).toNumber();
-                yr = leftOver.substring(i+1, sub1.length()).toLongWithBase(10).toNumber();
-                options = {:year => yr, :month => mm, :day => dd};
+                options = {:year => sub1.get("yr"), :month => sub1.get("mm"), :day => sub1.get("dd")};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
-                // var info1 = Gregorian.info(mom1, Time.FORMAT_SHORT);
+                info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
+                sub1 = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
                 countedDays = today.subtract(eMoment).value()/86400;
-                Storage.setValue("cDays1", countedDays);
                 if (eMoment.greaterThan(today)){
                     countedDays1 = "In " + countedDays.toString() + " days";
                 }else{
@@ -53,48 +46,38 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 sub2 = "Empty";
                 countedDays2 = null;
             }else{
-                i = sub2.find("-");
-                mm = sub2.substring(0, i).toLongWithBase(10).toNumber();
-                leftOver = sub2.substring(i+1, sub2.length());
-                i = leftOver.find("-");
-                dd = leftOver.substring(0, i).toLongWithBase(10).toNumber();
-                yr = leftOver.substring(i+1, sub2.length()).toLongWithBase(10).toNumber();
-                options = {:year => yr, :month => mm, :day => dd};
+                options = {:year => sub2.get("yr"), :month => sub2.get("mm"), :day => sub2.get("dd")};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
+                info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
+                sub2 = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
                 countedDays = today.subtract(eMoment).value()/86400;
-                Storage.setValue("cDays2", countedDays);
                 if (eMoment.greaterThan(today)){
                     countedDays2 = "In " + countedDays.toString() + " days";
                 }else{
                     countedDays2 = countedDays.toString() + " days";
                 }
 
-                System.println("this is the subtraction2: " + countedDays1);
+                System.println("this is the subtraction2: " + countedDays2);
             }
 
             if(sub3 == null){
                 sub3 = "Empty";
                 countedDays3 = null;
             }else{
-                i = sub3.find("-");
-                mm = sub3.substring(0, i).toLongWithBase(10).toNumber();
-                leftOver = sub3.substring(i+1, sub3.length());
-                i = leftOver.find("-");
-                dd = leftOver.substring(0, i).toLongWithBase(10).toNumber();
-                yr = leftOver.substring(i+1, sub3.length()).toLongWithBase(10).toNumber();
-                options = {:year => yr, :month => mm, :day => dd};
+                options = {:year => sub3.get("yr"), :month => sub3.get("mm"), :day => sub3.get("dd")};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
+                info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
+                sub3 = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
                 countedDays = today.subtract(eMoment).value()/86400;
-                Storage.setValue("cDays3", countedDays);
                 if (eMoment.greaterThan(today)){
                     countedDays3 = "In " + countedDays.toString() + " days";
                 }else{
                     countedDays3 = countedDays.toString() + " days";
                 }
-
-                System.println("this is the subtraction3: " + countedDays1);
+                
+                System.println("this is the subtraction3: " + countedDays3);
             }
 
             var menu = new WatchUi.Menu2({:title=>"Saved Events"});
