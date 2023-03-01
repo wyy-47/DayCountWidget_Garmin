@@ -40,7 +40,12 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 System.println(options);
                 eMoment = Gregorian.moment(options);
                 // var info1 = Gregorian.info(mom1, Time.FORMAT_SHORT);
-                countedDays1 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                if (eMoment.greaterThan(today)){
+                    System.println("in countdown");
+                    countedDays1 = "In " + (today.subtract(eMoment).value()/86400).toString() + " days";
+                }else{
+                    countedDays1 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                }
 
                 System.println("this is the subtraction1: " + countedDays1);
             }
@@ -58,7 +63,12 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 options = {:year => yr, :month => mm, :day => dd};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
-                countedDays2 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                if (eMoment.greaterThan(today)){
+                    System.println("in countdown");
+                    countedDays2 = "In " + (today.subtract(eMoment).value()/86400).toString() + " days";
+                }else{
+                    countedDays2 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                }
 
                 System.println("this is the subtraction2: " + countedDays1);
             }
@@ -76,7 +86,12 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 options = {:year => yr, :month => mm, :day => dd};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
-                countedDays3 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                if (eMoment.greaterThan(today)){
+                    System.println("in countdown");
+                    countedDays3 = "In " + (today.subtract(eMoment).value()/86400).toString() + " days";
+                }else{
+                    countedDays3 = (today.subtract(eMoment).value()/86400).toString() + " days";
+                }
 
                 System.println("this is the subtraction3: " + countedDays1);
             }
