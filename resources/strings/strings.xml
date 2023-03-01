@@ -14,7 +14,7 @@
     <!-- Date Picker -->
     <string id="datePickerTitle">MM-DD-YY</string>
     <string id="dateSeparator">-</string>
-    <string id="month01">Jan</string>
+    <!-- <string id="month01">Jan</string>
     <string id="month02">Feb</string>
     <string id="month03">Mar</string>
     <string id="month04">Apr</string>
@@ -25,7 +25,7 @@
     <string id="month09">Sep</string>
     <string id="month10">Oct</string>
     <string id="month11">Nov</string>
-    <string id="month12">Dec</string>
+    <string id="month12">Dec</string> -->
 
     <!-- Date Confirmation -->
     <string id="dateOne">DateSaved</string>
@@ -45,5 +45,8 @@
     <!-- Delete Confirmation -->
     <string id="delete">Delete?</string>
 
+    <!-- Glance info -->
+    <string id = "glanceDate">Date</string>
+    <string id = "glanceDays">Days</string>
 
 </strings>

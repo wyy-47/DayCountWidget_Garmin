@@ -27,6 +27,7 @@ class EventMenuDelegate extends WatchUi.Menu2InputDelegate {
             var location = Storage.getValue("selectedEvent");
             var gDate = Storage.getValue(location);
             Storage.setValue("glance", gDate);
+            System.println("glanced selected: " + Storage.getValue("glance"));
         }
     }
 

@@ -5,28 +5,36 @@ using Toybox.WatchUi;
 using Toybox.Graphics;
 import Toybox.Application.Storage;
 
-(:glance) class dayCountGlanceView extends WatchUi.GlanceView {
+(:glance) 
+class dayCountGlanceView extends WatchUi.GlanceView {
 
-    var options, eMoment, info, gDate, countedDays;
     function initialize(){
         GlanceView.initialize();
     }
 
-    function onShow(){
+    function onLayout(dc as Dc) as Void {
 
+    }
+
+    function onShow(){
     }
     
     function onUpdate(dc) {
     	dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
-    	dc.drawRectangle(0, 0, dc.getWidth(), dc.getHeight());
+    	//dc.drawRectangle(0, 0, dc.getWidth(), dc.getHeight());
+        var options, eMoment, info, gDate, countedDays;
+        var today = new Time.Moment(Time.today().value());
+        var dy = dc.getFontHeight(Graphics.FONT_TINY);
+        var dw = dc.getWidth();
+        var dh = dc.getHeight();
+        gDate = Storage.getValue("glance");
         if (gDate == null){
-            //dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-            dc.drawText (dc.getWidth()/2, dc.getHeight()/2, Graphics.FONT_GLANCE, "Empty", Graphics.TEXT_JUSTIFY_LEFT);
+            System.println("this is glance dc width: " + dc.getWidth());
+            System.println("this is glance : " );
+            dc.drawText (dw/2, dh/2-(dy/2), Graphics.FONT_TINY, "Empty", Graphics.TEXT_JUSTIFY_CENTER);
         }else{
-            gDate = Storage.getValue("glance");
-            System.println(gDate);
+            System.println(dy);
             options = {:year => gDate.get("yr"), :month => gDate.get("mm"), :day => gDate.get("dd")};
-            System.println(options);
             eMoment = Gregorian.moment(options);
             info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
             gDate = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
@@ -36,9 +44,9 @@ import Toybox.Application.Storage;
             }else{
                 countedDays = countedDays.toString() + " days";
             }
-            dc.drawText(100, 100, Graphics.FONT_SYSTEM_SMALL, gDate, Graphics.TEXT_JUSTIFY_LEFT);
+            dc.drawText(dc.getWidth()/2, dy/4, Graphics.FONT_TINY, gDate, Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(dc.getWidth()/2, dh/2, Graphics.FONT_TINY, countedDays, Graphics.TEXT_JUSTIFY_CENTER);
         }
-        
     }
 }
 
