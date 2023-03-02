@@ -4,6 +4,7 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.System;
 using Toybox.Math;
+using Toybox.Time.Gregorian;
 
 class InfoView extends WatchUi.View{
     function initialize(){
@@ -19,11 +20,16 @@ class InfoView extends WatchUi.View{
     // loading resources into memory.
     function onShow() as Void {
         var selected = Storage.getValue("selectedEvent");
-        var date, prop;
+        var date, prop, options, eMoment, info;
         var dSelected = 0;
         date = findDrawableById("selectedEvent") as Text;
         if (Storage.getValue(selected) != null){
             prop = Storage.getValue(selected); 
+            options = {:year => prop.get("yr"), :month => prop.get("mm"), :day => prop.get("dd")};
+            System.println(options);
+            eMoment = Gregorian.moment(options);
+            info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
+            prop = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
         }else{
             prop = "Empty";
         }
