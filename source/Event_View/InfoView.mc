@@ -4,9 +4,12 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 import Toybox.System;
 using Toybox.Math;
+using Toybox.Time;
 using Toybox.Time.Gregorian;
 
 class InfoView extends WatchUi.View{
+    var today, countedDays, todayDetail;
+    
     function initialize(){
         View.initialize();
     }
@@ -20,36 +23,63 @@ class InfoView extends WatchUi.View{
     // loading resources into memory.
     function onShow() as Void {
         var selected = Storage.getValue("selectedEvent");
-        var date, prop, options, eMoment, info;
-        var dSelected = 0;
-        date = findDrawableById("selectedEvent") as Text;
+        var prop, propD, options, eMoment;
+        var info = "";
+        var date = findDrawableById("selectedEvent") as Text;
+        var days = findDrawableById("infoDays") as Text;
         if (Storage.getValue(selected) != null){
+            today = new Time.Moment(Time.today().value());
             prop = Storage.getValue(selected); 
             options = {:year => prop.get("yr"), :month => prop.get("mm"), :day => prop.get("dd")};
             System.println(options);
             eMoment = Gregorian.moment(options);
             info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
             prop = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
+            countedDays = today.subtract(eMoment).value()/86400;
+            if (eMoment.greaterThan(today)){
+                propD = "In " + countedDays.toString() + " days";
+            }else{
+                propD = countedDays.toString() + " days";
+            }
         }else{
             prop = "Empty";
+            propD = "";
         }
+        days.setText(propD);
         date.setText(prop);
-        date.setColor(Graphics.COLOR_WHITE);
-        
-        if(selected.equals("dateOne")){
-            dSelected = Storage.getValue("cDays1");
-        } else if(selected.equals("dateTwo")){
-            dSelected = Storage.getValue("cDays2");
-        } else if(selected.equals("dateThree")){
-            dSelected = Storage.getValue("cDays3");
+
+        var weeks, months, yrs, rest, tww, tmm, tyr;
+        // var isBigMonth = false;
+        // var isFeb = info.month==2 ? true:false;
+        // System.println("info checking isFeb: " + isFeb);
+        // var bMonth = [1, 3, 5, 7, 8, 10, 12];
+        // for (var i = 0; i < 7; i +=1){
+        //     if (bMonth[i] == info.month){
+        //         isBigMonth = true;
+        //     }
+        // }
+        todayDetail = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
+        System.println("this is in info checking today.year outside of if: " + todayDetail.year);
+
+        // if(countedDays > 7){
+        //     weeks = Math.floor(countedDays / 7) + " weeks " + (countedDays%7) + "days";
+        //     System.println("this is attempted weeks: " + weeks);
+        //     if(countedDays > 30){
+        //         months = Math.floor(countedDays/30);
+        //         rest = countedDays - months*30;
+        //         weeks = Math.floor(rest/7) + "weeks" + (rest%7) + "days";
+        //         System.println(months + weeks);
+        //     }
+        // } 
+        tyr = todayDetail.year;
+        tmm = todayDetail.month;
+        yrs = info.year;
+        months = info.month;
+
+        // another ways of counting attempt
+        if (((tyr-yrs)>1) && (todayDetail.month-info.month)<0){
+            System.println((todayDetail.year - info.year));
         }
-
-        var weeks, months, yrs;
-
-        if(dSelected > 7){
-            weeks = Math.floor(dSelected / 7) + " weeks " + (dSelected%7) + "days";
-            System.println("this is attempted weeks: " + weeks);
-        } 
 
     }
 

@@ -38,8 +38,6 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 }else{
                     countedDays1 = countedDays.toString() + " days";
                 }
-
-                System.println("this is the subtraction1: " + countedDays1);
             }
 
             if(sub2 == null){
@@ -57,8 +55,6 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 }else{
                     countedDays2 = countedDays.toString() + " days";
                 }
-
-                System.println("this is the subtraction2: " + countedDays2);
             }
 
             if(sub3 == null){
@@ -76,8 +72,6 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 }else{
                     countedDays3 = countedDays.toString() + " days";
                 }
-                
-                System.println("this is the subtraction3: " + countedDays3);
             }
 
             var menu = new WatchUi.Menu2({:title=>"Saved Events"});

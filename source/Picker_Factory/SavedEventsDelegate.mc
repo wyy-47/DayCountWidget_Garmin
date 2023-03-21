@@ -30,7 +30,7 @@ class SavedEventsDelegate extends WatchUi.Menu2InputDelegate {
             System.println("event 2 selected");
             WatchUi.pushView(menu, new $.EventMenuDelegate(), WatchUi.SLIDE_UP);
         }
-        else if (id.equals("e2")){
+        else if (id.equals("e3")){
             Storage.setValue("selectedEvent", "dateThree");
             System.println("event 3 selected");
             WatchUi.pushView(menu, new $.EventMenuDelegate(), WatchUi.SLIDE_UP);
