@@ -49,17 +49,17 @@ class InfoView extends WatchUi.View{
         date.setText(prop);
 
         var weeks, months, yrs, rest, tww, tmm, tyr;
-        // var isBigMonth = false;
-        // var isFeb = info.month==2 ? true:false;
-        // System.println("info checking isFeb: " + isFeb);
-        // var bMonth = [1, 3, 5, 7, 8, 10, 12];
-        // for (var i = 0; i < 7; i +=1){
-        //     if (bMonth[i] == info.month){
-        //         isBigMonth = true;
-        //     }
-        // }
         todayDetail = Gregorian.info(Time.now(), Time.FORMAT_SHORT);
         System.println("this is in info checking today.year outside of if: " + todayDetail.year);
+        tyr = todayDetail.year;
+        tmm = todayDetail.month;
+        yrs = info.year;
+        months = info.month;
+
+        // another ways of counting attempt
+        if (((tyr-yrs)>1) && (todayDetail.month-info.month)<0){
+            System.println((todayDetail.year - info.year));
+        }
 
         // if(countedDays > 7){
         //     weeks = Math.floor(countedDays / 7) + " weeks " + (countedDays%7) + "days";
@@ -71,15 +71,20 @@ class InfoView extends WatchUi.View{
         //         System.println(months + weeks);
         //     }
         // } 
-        tyr = todayDetail.year;
-        tmm = todayDetail.month;
-        yrs = info.year;
-        months = info.month;
-
-        // another ways of counting attempt
-        if (((tyr-yrs)>1) && (todayDetail.month-info.month)<0){
-            System.println((todayDetail.year - info.year));
+        
+        var yr, mm, dd;
+        //another attempt assuming a month is 30 days
+        if ((countedDays > 30) && (countedDays < 365)){
+            mm = Math.floor(countedDays/30) + "months" + (countedDays%30) + "days";
+            System.println("this is new attempt months: " + mm);
         }
+        else if (countedDays > 365){
+            var dummy;
+            dummy = Math.floor(countedDays/365);
+            yr = dummy + "years" + Math.floor((countedDays-dummy*365)/30) + "months" + (countedDays%30) + "days";
+            System.println("this is new attempt yrs: " + yr);
+        }
+
 
     }
 

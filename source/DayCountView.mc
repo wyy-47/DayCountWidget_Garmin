@@ -28,10 +28,11 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 countedDays1 = null;
             }else{
                 options = {:year => sub1.get("yr"), :month => sub1.get("mm"), :day => sub1.get("dd")};
-                System.println(options);
+                System.println("this is options:" + options);
                 eMoment = Gregorian.moment(options);
                 info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
                 sub1 = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
+                System.println("this is sub1: " + sub1);
                 countedDays = today.subtract(eMoment).value()/86400;
                 if (eMoment.greaterThan(today)){
                     countedDays1 = "In " + countedDays.toString() + " days";
