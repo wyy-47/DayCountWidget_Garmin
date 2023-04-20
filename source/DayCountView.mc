@@ -13,9 +13,14 @@ class DayCountView extends WatchUi.MenuInputDelegate {
     }
 
     public function onMenuItem(item as Symbol) as Void {
+
+        // Storage.setValue("dateOne", null);
+        // Storage.setValue("dateTwo", null);
+        // Storage.setValue("dateThree", null);
+            
         if (item == :Item1) {
             System.println("Item 1");
-            var today = new Time.Moment(Time.today().value());
+            var today = new Time.Moment(Time.now().value());
 
             var sub1 = Storage.getValue("dateOne");
             var sub2 = Storage.getValue("dateTwo");
@@ -30,7 +35,8 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 options = {:year => sub1.get("yr"), :month => sub1.get("mm"), :day => sub1.get("dd")};
                 System.println("this is options:" + options);
                 eMoment = Gregorian.moment(options);
-                info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
+                info = Gregorian.utcInfo(eMoment, Time.FORMAT_SHORT);
+                System.println("info: " + info.day);
                 sub1 = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
                 System.println("this is sub1: " + sub1);
                 countedDays = today.subtract(eMoment).value()/86400;
@@ -48,7 +54,7 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 options = {:year => sub2.get("yr"), :month => sub2.get("mm"), :day => sub2.get("dd")};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
-                info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
+                info = Gregorian.utcInfo(eMoment, Time.FORMAT_SHORT);
                 sub2 = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
                 countedDays = today.subtract(eMoment).value()/86400;
                 if (eMoment.greaterThan(today)){
@@ -65,7 +71,7 @@ class DayCountView extends WatchUi.MenuInputDelegate {
                 options = {:year => sub3.get("yr"), :month => sub3.get("mm"), :day => sub3.get("dd")};
                 System.println(options);
                 eMoment = Gregorian.moment(options);
-                info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
+                info = Gregorian.utcInfo(eMoment, Time.FORMAT_SHORT);
                 sub3 = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
                 countedDays = today.subtract(eMoment).value()/86400;
                 if (eMoment.greaterThan(today)){

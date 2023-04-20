@@ -36,7 +36,7 @@ class dayCountGlanceView extends WatchUi.GlanceView {
             System.println(dy);
             options = {:year => gDate.get("yr"), :month => gDate.get("mm"), :day => gDate.get("dd")};
             eMoment = Gregorian.moment(options);
-            info = Gregorian.info(eMoment, Time.FORMAT_SHORT);
+            info = Gregorian.utcInfo(eMoment, Time.FORMAT_SHORT);
             gDate = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
             countedDays = today.subtract(eMoment).value()/86400;
             if (eMoment.greaterThan(today)){
