@@ -15,7 +15,8 @@ Day counting widget for Garmin API 4.1.0+, this was wrote for personal use, so o
 ## To do
 1. Notification system.
     a. When the count down reach 0.
-2. Refresh after actions in saved events? Depends on the memory usage.
+    b. anniversary 
+2. Maybe somehow type in the date (or better than pick between 2018-2026)?
 3. Find a way to update teh glance once a day?
 
 ## Fixed bugs (maybe improve in the future)

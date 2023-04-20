@@ -65,7 +65,7 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
             day = "0" + values[2];
         }
         var year = "20"+values[4];
-
+        
         if ((day != null) && (year != null)) {
             var date = month + separator + day + separator + year;
             var eSelected = Storage.getValue("selectedEvent");
@@ -86,7 +86,6 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
                 Storage.setValue("dateNew", date);
             }
         }    
-        
         WatchUi.pushView(new $.ConfirmationView(), new $.ConfirmationDelegate(), WatchUi.SLIDE_IMMEDIATE);
         return true;
     }

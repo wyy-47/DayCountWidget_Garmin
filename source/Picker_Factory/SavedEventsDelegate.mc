@@ -35,7 +35,6 @@ class SavedEventsDelegate extends WatchUi.Menu2InputDelegate {
             System.println("event 3 selected");
             WatchUi.pushView(menu, new $.EventMenuDelegate(), WatchUi.SLIDE_UP);
         }
-        
     }
 
     //! Handle the back key being pressed
