@@ -23,10 +23,11 @@ class InfoView extends WatchUi.View{
     // loading resources into memory.
     function onShow() as Void {
         var selected = Storage.getValue("selectedEvent");
-        var prop, propD, options, eMoment;
+        var prop, propD, options, eMoment, propDtM;
         var info = "";
         var date = findDrawableById("selectedEvent") as Text;
         var days = findDrawableById("infoDays") as Text;
+        var dToMon = findDrawableById("daysToMonth") as TextArea;
         if (Storage.getValue(selected) != null){
             today = new Time.Moment(Time.today().value());
             prop = Storage.getValue(selected); 
@@ -55,6 +56,55 @@ class InfoView extends WatchUi.View{
         tmm = todayDetail.month;
         yrs = info.year;
         mm = info.month;
+
+        var resultyr = 0;
+        var resultmonth = 0;
+        if (countedDays < 31){
+            if (countedDays > 28 and mm == 2){
+            countedDays -= 28;
+            resultmonth += 1;
+            }
+        }
+        else{
+            while ((yrs < tyr) or (mm < tmm)){
+                if (mm ==12){
+                    countedDays -= 31;
+                    resultmonth += 1;
+                    mm = 1;
+                    yrs += 1;
+                }
+                else if (mm == 1 or mm ==3 or mm ==5 or mm ==7 or mm ==8 or mm ==10){
+                    countedDays -= 31;
+                    resultmonth += 1;
+                    mm += 1;
+                }
+                else if (mm == 2){
+                    countedDays -= 28;
+                    resultmonth += 1;
+                    mm += 1;
+                }
+                else{
+                    countedDays -= 30;
+                    resultmonth += 1;
+                    mm += 1;
+                }
+            }
+        }
+
+        if (resultmonth > 12){
+            resultyr = Math.floor(resultmonth/12);
+            resultmonth = resultmonth - resultyr*12;
+            propDtM = resultyr + " year " + resultmonth + " month " + countedDays + " days";
+        }
+        else if (resultmonth == 0){
+            propDtM = "";
+        }
+        else{
+            propDtM = resultmonth + " month " + countedDays + " days";
+        }
+        dToMon.setText(propDtM);
+        System.println("infoview, new yr,m,d: " + resultyr + resultmonth + countedDays);
+
 
         //!!!thoughts!!! with GPT: while current_year < end_date.year or current_month <= end_date.month
         // then find days in each month, by using the end date of month minus the 1 day of month
@@ -87,35 +137,6 @@ class InfoView extends WatchUi.View{
         //         System.println("infoview, monthcount: " + monthcount);
         //     }
         // }
-            
-
-        // // another ways of counting attempt
-        // if (((tyr-yrs)>1) && (todayDetail.month-info.month)<0){
-        //     System.println((todayDetail.year - info.year));
-        // }
-
-        //another attempt assuming a month is 30 days
-        // if ((countedDays > 30) && (countedDays < 365)){
-        //     mm = Math.floor(countedDays/30) + "months" + (countedDays%30) + "days";
-        //     System.println("this is new attempt months: " + mm);
-        // }
-        // else if (countedDays > 365){
-        //     var dummy;
-        //     dummy = Math.floor(countedDays/365);
-        //     yr = dummy + "years" + Math.floor((countedDays-dummy*365)/30) + "months" + (countedDays%30) + "days";
-        //     System.println("this is new attempt yrs: " + yr);
-        // }
-
-        // if(countedDays > 7){
-        //     weeks = Math.floor(countedDays / 7) + " weeks " + (countedDays%7) + "days";
-        //     System.println("this is attempted weeks: " + weeks);
-        //     if(countedDays > 30){
-        //         months = Math.floor(countedDays/30);
-        //         rest = countedDays - months*30;
-        //         weeks = Math.floor(rest/7) + "weeks" + (rest%7) + "days";
-        //         System.println(months + weeks);
-        //     }
-        // } 
          
     }
 
