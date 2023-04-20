@@ -4,8 +4,7 @@ Day counting widget for Garmin API 4.1.0+, this was wrote for personal use, so o
 ## FlowChart
 
 ## Bug
-1. Edit -> set glance, will cause error
-2. Handle invalid user input date (such as 2.31)
+1. Handle invalid user input date (such as 2.31)
 
 ## Functions so far
 1. Glance view of an user-selected Event date, with the set date, and days counting up or down.
@@ -18,6 +17,10 @@ Day counting widget for Garmin API 4.1.0+, this was wrote for personal use, so o
     a. When the count down reach 0.
 2. Refresh after actions in saved events? Depends on the memory usage.
 3. Find a way to update teh glance once a day?
+
+## Fixed bugs (maybe improve in the future)
+1. Edit -> set glance, will cause error
+    Fixed, now edit -> init menu
 
 ## Acknowledgement 
 The icon is from <a href="https://www.flaticon.com/free-icons/emotion" title="emotion icons">Emotion icons created by Baianat - Flaticon</a>.
