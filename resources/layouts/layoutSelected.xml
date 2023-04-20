@@ -1,4 +1,11 @@
 <layout id="LayoutSelected">
-    <label id="selectedEvent" x="center" y="dc.getHeight()/4" text="@Strings.selectedEvent" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
-    <label id="infoDays" x="center" y="dc.getHeight()/4+20" text="@Strings.infoDays" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
+    <label id="selectedEvent" x="center" y="10%" text="@Strings.selectedEvent" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
+    <label id="infoDays" x="center" y="25%" text="@Strings.infoDays" color="Graphics.COLOR_WHITE" font = "Graphics.FONT_SMALL" justification="Graphics.TEXT_JUSTIFY_CENTER" />
+    <text-area id="daysToMonth" text="@Strings.daysToMonth" x="center" y="35%" width="80%" height="80%"
+        color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER">
+        <fonts>
+            <font>Gfx.FONT_SMALL</font>
+            <font>Gfx.FONT_XTINY</font>
+        </fonts>
+    </text-area>
 </layout>

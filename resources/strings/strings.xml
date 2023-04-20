@@ -41,6 +41,7 @@
     <!-- Event info -->
     <string id="selectedEvent">selected</string>
     <string id="infoDays">selected</string>
+    <string id="daysToMonth">selected</string>
 
     <!-- Delete Confirmation -->
     <string id="delete">Delete?</string>
