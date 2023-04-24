@@ -21,7 +21,10 @@ Day counting widget for Garmin API 4.1.0+, this was wrote for personal use, so o
 
 ## Fixed bugs (maybe improve in the future)
 1. Edit -> set glance, will cause error
-    Fixed, now edit -> init menu
+    Fixed, now edit -> init menu (not fixed, will stuck between main and confirmed)
+    Another approach: pass down the menu as parent menu, then call menu and eventmenudelegate. (https://forums.garmin.com/developer/connect-iq/f/discussion/256922/after-poping-current-view-how-to-refresh-the-view-at-top-of-view-stack)
+        a. this works with Ui.switchToView, but somehow on the edit menu, needs to press back twice.
+            i. fixed by pop twice, also fixed new event, but transition is not continuous.
 
 ## Acknowledgement 
 The icon is from <a href="https://www.flaticon.com/free-icons/emotion" title="emotion icons">Emotion icons created by Baianat - Flaticon</a>.

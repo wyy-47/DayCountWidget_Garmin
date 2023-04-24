@@ -30,9 +30,11 @@ class NewEvent extends WatchUi.Picker {
 //! Responds to a date picker selection or cancellation
 class NewEventDelegate extends WatchUi.PickerDelegate {
 
+    var editMenu;
     //! Constructor
-    public function initialize() {
+    public function initialize(editMenu) {
         PickerDelegate.initialize();
+        self.editMenu = editMenu;
     }
 
     //! Handle a cancel event from the picker
@@ -69,6 +71,7 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
         if ((day != null) && (year != null)) {
             var date = month + separator + day + separator + year;
             var eSelected = Storage.getValue("selectedEvent");
+            System.println("in new event, eselected " + eSelected);
             if (eSelected != null){
                 Storage.setValue("dateNew", date);
                 Storage.setValue(eSelected, options);
@@ -85,8 +88,11 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
                 Storage.setValue("dateThree", options);
                 Storage.setValue("dateNew", date);
             }
-        }    
-        WatchUi.pushView(new $.ConfirmationView(), new $.ConfirmationDelegate(), WatchUi.SLIDE_IMMEDIATE);
+        }
+
+        // WatchUi.popView(WatchUi.SLIDE_RIGHT);
+        WatchUi.switchToView(new $.ConfirmationView(), new $.ConfirmationDelegate(editMenu), WatchUi.SLIDE_IMMEDIATE);
+        
         return true;
     }
 }

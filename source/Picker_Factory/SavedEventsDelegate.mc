@@ -6,10 +6,11 @@ import Toybox.Application.Storage;
 
 //! This is the menu input delegate for the main menu of the application
 class SavedEventsDelegate extends WatchUi.Menu2InputDelegate {
-
+    var parentmainmenu;
     //! Constructor
-    public function initialize() {
+    public function initialize(parentmainmenu) {
         Menu2InputDelegate.initialize();
+        self.parentmainmenu = parentmainmenu;
     }
 
     public function onSelect(item as MenuItem) as Void {
@@ -23,7 +24,7 @@ class SavedEventsDelegate extends WatchUi.Menu2InputDelegate {
         if (id.equals("e1")){
             System.println("event 1 selected");
             Storage.setValue("selectedEvent", "dateOne");
-            WatchUi.pushView(menu, new $.EventMenuDelegate(), WatchUi.SLIDE_UP);
+            WatchUi.pushView(menu, new $.EventMenuDelegate(parentmainmenu, "e1", menu), WatchUi.SLIDE_UP);
         }
         else if (id.equals("e2")){
             Storage.setValue("selectedEvent", "dateTwo");
