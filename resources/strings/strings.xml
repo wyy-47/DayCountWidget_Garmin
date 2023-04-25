@@ -7,9 +7,9 @@
     <string id="MenuLabel2">New Event</string>
 
     <!-- First Picker -->
-    <string id="picker">Options</string>
+    <!-- <string id="picker">Options</string>
     <string id="PickerSavedEvents">Saved Events</string>
-    <string id="pickerNewEvent">New Event</string>
+    <string id="pickerNewEvent">New Event</string> -->
 
     <!-- Date Picker -->
     <string id="datePickerTitle">MM-DD-YY</string>
@@ -42,9 +42,6 @@
     <string id="selectedEvent">selected</string>
     <string id="infoDays">selected</string>
     <string id="daysToMonth">selected</string>
-
-    <!-- Delete Confirmation -->
-    <string id="delete">Delete?</string>
 
     <!-- Glance info -->
     <string id = "glanceDate">Date</string>

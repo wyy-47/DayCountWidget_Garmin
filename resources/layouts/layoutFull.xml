@@ -1,5 +1,5 @@
 <layout id="LayoutFull">
     <!--<bitmap id="id_monkey" x="center" y="center" filename="../drawables/monkey.png" />-->
-    <label id="FullMsg1" x="center" y="100" text="@Strings.fullMsg1" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
-    <label id="FullMsg2" x="center" y="140" text="@Strings.fullMsg2" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
+    <label id="FullMsg1" x="center" y="25%" text="@Strings.fullMsg1" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
+    <label id="FullMsg2" x="center" y="35%" text="@Strings.fullMsg2" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
 </layout>

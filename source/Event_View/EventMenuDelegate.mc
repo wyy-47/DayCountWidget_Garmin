@@ -8,13 +8,12 @@ import Toybox.Application.Storage;
 class EventMenuDelegate extends WatchUi.Menu2InputDelegate {
 
     //parent var
-    var parentmenu, parentmenuid, thismenu;
+    var parentmenu, parentmenuid;
     //! Constructor
-    function initialize(parentmenu, parentmenuid, thismenu) {
+    function initialize(parentmenu, parentmenuid) {
         Menu2InputDelegate.initialize();
         self.parentmenu = parentmenu;
         self.parentmenuid = parentmenuid;
-        self.thismenu = thismenu;
     }
 
     public function onSelect(item as MenuItem) as Void {
@@ -26,26 +25,17 @@ class EventMenuDelegate extends WatchUi.Menu2InputDelegate {
             System.println("edit selected");
             WatchUi.pushView(new $.NewEvent(), new $.NewEventDelegate(parentitem), WatchUi.SLIDE_UP);
         }else if (id.equals("delete")){
-            System.println("delete selected");
-            WatchUi.pushView(new $.DeleteView(), new $.DeleteDelegate(parentitem), WatchUi.SLIDE_UP);
+            var message = "Delete?";
+            var dialog = new WatchUi.Confirmation(message);
+            WatchUi.pushView(dialog, new McConfirmationDelegate(parentitem),WatchUi.SLIDE_IMMEDIATE);
         } else if (id.equals("info")){
             System.println("infoPage selected");
             WatchUi.pushView(new $.InfoView(), new $.InfoDelegate(), WatchUi.SLIDE_UP);
         } else if (id.equals("glance")){
-            var location = Storage.getValue("selectedEvent");
-            var gDate = Storage.getValue(location);
-            Storage.setValue("glance", gDate);
-            System.println("glanced selected: " + Storage.getValue("glance"));
+            var message = "Set Glance?";
+            var dialog = new WatchUi.Confirmation(message);
+            WatchUi.pushView(dialog, new McConfirmationDelegate(null),WatchUi.SLIDE_IMMEDIATE);
         }
-
-        //update the prev. menu
-        
-        var datenewnow = Storage.getValue("dateNew");
-        if(parentitem){
-            System.println("in eventmenudelegate, this is datenew now: " + datenewnow);
-            System.println("in eventmenudelegate, this is parentitem: " + parentitem.toString());
-        }
-       
     }
 
     // ! Handle the back key being pressed
