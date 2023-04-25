@@ -101,10 +101,6 @@ class DayCountView extends WatchUi.MenuInputDelegate {
 
     public function onKey(keyEvent) {
         System.println(keyEvent.getKey()); // e.g. KEY_MENU = 7
-        // var key = keyEvent.getKey();
-        // if (key == WatchUi.KEY_ESC){
-        //     WatchUi.popView(SLIDE_IMMEDIATE);
-        // }
         return true;
     }
 }

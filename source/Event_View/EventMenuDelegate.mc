@@ -18,13 +18,16 @@ class EventMenuDelegate extends WatchUi.Menu2InputDelegate {
     }
 
     public function onSelect(item as MenuItem) as Void {
+        var parentidx = parentmenu.findItemById(parentmenuid);
+        var parentitem = parentmenu.getItem(parentidx);
+        
         var id = item.getId() as String;
         if (id.equals("edit")){
             System.println("edit selected");
-            WatchUi.pushView(new $.NewEvent(), new $.NewEventDelegate(thismenu), WatchUi.SLIDE_UP);
+            WatchUi.pushView(new $.NewEvent(), new $.NewEventDelegate(parentitem), WatchUi.SLIDE_UP);
         }else if (id.equals("delete")){
             System.println("delete selected");
-            WatchUi.pushView(new $.DeleteView(), new $.DeleteDelegate(), WatchUi.SLIDE_UP);
+            WatchUi.pushView(new $.DeleteView(), new $.DeleteDelegate(parentitem), WatchUi.SLIDE_UP);
         } else if (id.equals("info")){
             System.println("infoPage selected");
             WatchUi.pushView(new $.InfoView(), new $.InfoDelegate(), WatchUi.SLIDE_UP);
@@ -36,19 +39,19 @@ class EventMenuDelegate extends WatchUi.Menu2InputDelegate {
         }
 
         //update the prev. menu
-        var parentidx = parentmenu.findItemById(parentmenuid);
-        var parentitem = parentmenu.getItem(parentidx);
         
+        var datenewnow = Storage.getValue("dateNew");
         if(parentitem){
-            System.println("in eventmenudelegate, i dont understand" + parentitem);
+            System.println("in eventmenudelegate, this is datenew now: " + datenewnow);
+            System.println("in eventmenudelegate, this is parentitem: " + parentitem.toString());
         }
        
     }
 
     // ! Handle the back key being pressed
     public function onBack() as Void {
+        Storage.setValue("selectedEvent", null);
         WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-        System.println("back press detected");
+        // WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
     }
 }

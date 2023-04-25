@@ -43,10 +43,8 @@ class ConfirmationView extends WatchUi.View{
 class ConfirmationDelegate extends WatchUi.BehaviorDelegate {
 
     //! Constructor
-    var editmenu;
-    public function initialize(editmenu) {
+    public function initialize() {
         BehaviorDelegate.initialize();
-        self.editmenu = editmenu;
     }
 
     //! Handle a button being pressed and released
@@ -63,15 +61,16 @@ class ConfirmationDelegate extends WatchUi.BehaviorDelegate {
     //! Push a new picker view
     //! @return true if handled, false otherwise
     public function pushPicker() as Boolean {
-        if (editmenu!=null){
-            WatchUi.switchToView(editmenu, new $.EventMenuDelegate(null, null, null), WatchUi.SLIDE_UP);
-            //if this workd, pass in the new date and return the event id or bool to indicate the event needed update
-        }
-        else{
-            WatchUi.switchToView(new $.Rez.Menus.MainMenu(), new DayCountView(), SLIDE_IMMEDIATE);
-            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-        }
-        // WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        // if (editmenu!=null){
+        //     WatchUi.popView(WatchUi.SLIDE_UP);
+        //     // WatchUi.pushView(editmenu, new $.EventMenuDelegate(null, null, null, true), WatchUi.SLIDE_UP);
+        //     //if this workd, pass in the new date and return the event id or bool to indicate the event needed update
+        // }
+        // else{
+        //     // WatchUi.switchToView(new $.Rez.Menus.MainMenu(), new DayCountView(), SLIDE_IMMEDIATE);
+        //     WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        // }
+        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         // WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         // WatchUi.pushView(new $.Rez.Menus.MainMenu(), new DayCountView(), SLIDE_IMMEDIATE);
         return true;
