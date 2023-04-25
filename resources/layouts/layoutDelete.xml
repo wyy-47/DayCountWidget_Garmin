@@ -1,3 +1,0 @@
-<layout id="LayoutDelete">
-    <label id="delete" x="center" y="center" text="@Strings.delete" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER" />
-</layout>
