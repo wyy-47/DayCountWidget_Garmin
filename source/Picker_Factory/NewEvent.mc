@@ -3,6 +3,7 @@ import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.WatchUi;
 using Toybox.Time.Gregorian;
+using Toybox.Time;
 
 //! Picker that allows the user to choose a date
 class NewEvent extends WatchUi.Picker {
@@ -30,9 +31,11 @@ class NewEvent extends WatchUi.Picker {
 //! Responds to a date picker selection or cancellation
 class NewEventDelegate extends WatchUi.PickerDelegate {
 
+    var editparentitem;
     //! Constructor
-    public function initialize() {
+    public function initialize(editparentitem) {
         PickerDelegate.initialize();
+        self.editparentitem = editparentitem;
     }
 
     //! Handle a cancel event from the picker
@@ -46,7 +49,6 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
     //! @param values The values chosen in the picker
     //! @return true if handled, false otherwise
     public function onAccept(values as Array<Number?>) as Boolean {
-        System.println(values);
         var separator = WatchUi.loadResource($.Rez.Strings.dateSeparator) as String;
         var month = values[0];
         var day = values[2];
@@ -55,8 +57,16 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
             "mm" => values[0],
             "dd" => values[2]
         };
-        // var pickedDate = Gregorian.moment(options);
-        // var info = Gregorian.info(pickedDate, Time.FORMAT_SHORT);
+        var editedoptions = {
+            :year => 2000+values[4],
+            :month => values[0],
+            :day => values[2]
+        };
+        System.println("this is options:" + editedoptions);
+        var editedmoment = Gregorian.moment(editedoptions);
+        System.println("editedmoment: " + editedmoment.value()/86400);
+        var info = Gregorian.utcInfo(editedmoment, Time.FORMAT_SHORT);
+        System.println("info: " + info.day);
         // System.println("this is the input month: " + info.month.format("%02u"));
         if (values[0]<10){
             month = "0" + values[0];
@@ -65,15 +75,26 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
             day = "0" + values[2];
         }
         var year = "20"+values[4];
-
+        var today = new Time.Moment(Time.now().value());
         if ((day != null) && (year != null)) {
             var date = month + separator + day + separator + year;
             var eSelected = Storage.getValue("selectedEvent");
+            System.println("in new event, eselected " + eSelected);
             if (eSelected != null){
                 Storage.setValue("dateNew", date);
                 Storage.setValue(eSelected, options);
                 Storage.setValue("glance", options);
                 Storage.setValue("selectedEvent", null);
+                //-----update item------
+                var countedDays = today.subtract(editedmoment).value()/86400;
+                if (editedmoment.greaterThan(today)){
+                    countedDays = "In " + countedDays.toString() + " days";
+                }else{
+                    countedDays = countedDays.toString() + " days";
+                }
+                editparentitem.setLabel(year + "-" + month + "-" + day);
+                editparentitem.setSubLabel(countedDays);
+                //-----done updateing-------
             }
             else if (Storage.getValue("dateOne") == null){
                 Storage.setValue("dateOne", options);
@@ -85,9 +106,11 @@ class NewEventDelegate extends WatchUi.PickerDelegate {
                 Storage.setValue("dateThree", options);
                 Storage.setValue("dateNew", date);
             }
-        }    
+        }
+
+        // WatchUi.popView(WatchUi.SLIDE_RIGHT);
+        WatchUi.switchToView(new $.ConfirmationView(), new $.ConfirmationDelegate(), WatchUi.SLIDE_IMMEDIATE);
         
-        WatchUi.pushView(new $.ConfirmationView(), new $.ConfirmationDelegate(), WatchUi.SLIDE_IMMEDIATE);
         return true;
     }
 }

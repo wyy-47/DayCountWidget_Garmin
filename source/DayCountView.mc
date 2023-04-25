@@ -87,19 +87,19 @@ class DayCountView extends WatchUi.MenuInputDelegate {
             menu.addItem(new WatchUi.MenuItem(sub2, countedDays2, "e2", null));
             menu.addItem(new WatchUi.MenuItem(sub3, countedDays3, "e3", null));
             //menu.addItem(new WatchUi.MenuItem(testYear, null, null, null));
-            WatchUi.pushView(menu, new $.SavedEventsDelegate(), WatchUi.SLIDE_UP);
+            WatchUi.pushView(menu, new $.SavedEventsDelegate(menu), WatchUi.SLIDE_UP);
         } 
         else if (item == :Item2) {
             System.println("Item 2");
             if ((Storage.getValue("dateOne") != null)&&(Storage.getValue("dateTwo") != null)&&(Storage.getValue("dateThree") != null)){
                 WatchUi.pushView(new $.SpaceFull(), new $.SpaceFullDelegate(), WatchUi.SLIDE_UP);
             }else{
-                WatchUi.pushView(new $.NewEvent(), new $.NewEventDelegate(), WatchUi.SLIDE_UP);
+                WatchUi.pushView(new $.NewEvent(), new $.NewEventDelegate(null), WatchUi.SLIDE_UP);
             }
         }
     }
 
-    function onKey(keyEvent) {
+    public function onKey(keyEvent) {
         System.println(keyEvent.getKey()); // e.g. KEY_MENU = 7
         return true;
     }

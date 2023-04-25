@@ -37,8 +37,10 @@ class DeleteView extends WatchUi.View{
 class DeleteDelegate extends WatchUi.BehaviorDelegate {
 
     //! Constructor
-    public function initialize() {
+    var parentitem;
+    public function initialize(parentitem) {
         BehaviorDelegate.initialize();
+        self.parentitem = parentitem;
     }
 
     //! Handle a button being pressed and released
@@ -49,6 +51,8 @@ class DeleteDelegate extends WatchUi.BehaviorDelegate {
         if (WatchUi.KEY_ENTER == key) {
             var location = Storage.getValue("selectedEvent");
             Storage.setValue(location, null);
+            parentitem.setLabel("Empty");
+            parentitem.setSubLabel(null);
             System.println("this is in delete: " + location);
             return pushPicker();
         } else if (WatchUi.KEY_ESC == key){
@@ -61,8 +65,7 @@ class DeleteDelegate extends WatchUi.BehaviorDelegate {
     //! @return true if handled, false otherwise
     public function pushPicker() as Boolean {
         Storage.setValue("selectedEvent", null);
-        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-        WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
+        WatchUi.popView(SLIDE_RIGHT);
         return true;
     }
 
