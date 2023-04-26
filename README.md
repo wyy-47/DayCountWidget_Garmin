@@ -14,13 +14,13 @@ Day counting widget for Garmin API 4.1.0+, this was wrote for personal use, so o
 5.  Update menu after edit to a new date.
 
 ## To do
-1.  Notification system.
-    - When the count down reach 0.
-    - anniversary 
+1.  Find a way to update the glance once a day?
 2.  Details on UI such as string location.
 3.  Reorganize the files and folders.
 4.  Maybe somehow type in the date (or better than pick between 2018-2026)?
-5.  Find a way to update the glance once a day?
+5.  Notification system. (doesn't seem to be possible so far)
+    - When the count down reach 0.
+    - anniversary 
 
 ## Documentation
 ### Fixed bugs (maybe improve in the future)

@@ -19,21 +19,22 @@ class EventMenuDelegate extends WatchUi.Menu2InputDelegate {
     public function onSelect(item as MenuItem) as Void {
         var parentidx = parentmenu.findItemById(parentmenuid);
         var parentitem = parentmenu.getItem(parentidx);
-        
+        var message, dialog;
         var id = item.getId() as String;
         if (id.equals("edit")){
             System.println("edit selected");
             WatchUi.pushView(new $.NewEvent(), new $.NewEventDelegate(parentitem), WatchUi.SLIDE_UP);
         }else if (id.equals("delete")){
-            var message = "Delete?";
-            var dialog = new WatchUi.Confirmation(message);
+            message = "Delete?";
+            dialog = new WatchUi.Confirmation(message);
             WatchUi.pushView(dialog, new McConfirmationDelegate(parentitem),WatchUi.SLIDE_IMMEDIATE);
         } else if (id.equals("info")){
             System.println("infoPage selected");
             WatchUi.pushView(new $.InfoView(), new $.InfoDelegate(), WatchUi.SLIDE_UP);
         } else if (id.equals("glance")){
-            var message = "Set Glance?";
-            var dialog = new WatchUi.Confirmation(message);
+            message = "Set Glance?";
+            System.println("seleted glance");
+            dialog = new WatchUi.Confirmation(message);
             WatchUi.pushView(dialog, new McConfirmationDelegate(null),WatchUi.SLIDE_IMMEDIATE);
         }
     }

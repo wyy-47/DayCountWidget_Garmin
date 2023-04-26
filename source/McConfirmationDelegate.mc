@@ -7,6 +7,7 @@ class McConfirmationDelegate extends WatchUi.ConfirmationDelegate {
     function initialize(parentitem) {
         ConfirmationDelegate.initialize();
         self.parentitem = parentitem;
+        System.println("mc confirm parent item " + parentitem);
     }
 
     function onResponse(response) {
@@ -14,7 +15,7 @@ class McConfirmationDelegate extends WatchUi.ConfirmationDelegate {
             System.println("Cancel");
         } else {
             var location = Storage.getValue("selectedEvent");
-            if (parentitem!=null){
+            if (parentitem != null){
                 System.println("the parent id is delete");
                 Storage.setValue(location, null);
                 parentitem.setLabel("Empty");
@@ -25,7 +26,6 @@ class McConfirmationDelegate extends WatchUi.ConfirmationDelegate {
                 Storage.setValue("glance", gDate);
                 System.println("glanced selected: " + Storage.getValue("glance"));
             }
-            
         }
     }
 }
