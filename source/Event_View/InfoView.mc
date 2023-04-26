@@ -24,6 +24,7 @@ class InfoView extends WatchUi.View{
     function onShow() as Void {
         var selected = Storage.getValue("selectedEvent");
         var prop, propD, options, eMoment, propDtM;
+        var infuture = false;
         var info = "";
         var date = findDrawableById("selectedEvent") as Text;
         var days = findDrawableById("infoDays") as Text;
@@ -38,6 +39,7 @@ class InfoView extends WatchUi.View{
             prop = Lang.format("$1$-$2$-$3$", [info.year.format("%04u"),info.month.format("%02u"),info.day.format("%02u")]);
             countedDays = today.subtract(eMoment).value()/86400;
             if (eMoment.greaterThan(today)){
+                infuture = true;
                 propD = "In " + countedDays.toString() + " days";
             }else{
                 propD = countedDays.toString() + " days";
@@ -59,6 +61,7 @@ class InfoView extends WatchUi.View{
 
         var resultyr = 0;
         var resultmonth = 0;
+
         if (countedDays < 31){
             if (countedDays > 28 and mm == 2){
             countedDays -= 28;
@@ -66,6 +69,13 @@ class InfoView extends WatchUi.View{
             }
         }
         else{
+            // shows 10 month and -20 days
+            if(infuture){
+                tyr = info.year;
+                tmm = info.month-1;
+                yrs = todayDetail.year;
+                mm = todayDetail.month;
+            }
             while ((yrs < tyr) or (mm < tmm)){
                 if (mm ==12){
                     countedDays -= 31;
@@ -104,39 +114,6 @@ class InfoView extends WatchUi.View{
         }
         dToMon.setText(propDtM);
         System.println("infoview, new yr,m,d: " + resultyr + resultmonth + countedDays);
-
-
-        //!!!thoughts!!! with GPT: while current_year < end_date.year or current_month <= end_date.month
-        // then find days in each month, by using the end date of month minus the 1 day of month
-        // and compare that with today's day in month 
-        // works but too much memory (24kb)
-        // var curmonth, opttest2, daycount, dummyyr, dummymm, dummy;
-        // var monthcount = 0;
-        // if ((yrs < tyr) or (mm <= tmm)){
-        //     while ((yrs < tyr) or (mm <= tmm)){
-        //         dummyyr = yrs + 1;
-        //         dummymm = mm + 2;
-        //         if (mm == 12){
-        //             yrs = yrs + 1;
-        //             dummyyr = yrs + 1;
-        //             mm = 0;
-        //             dummymm = 2;
-        //         } else if (mm == 11){
-        //             dummyyr = yrs + 1;
-        //             dummymm = 1;
-        //         }
-        //         curmonth = {:year => yrs, :month => mm+1, :day => 1};
-        //         System.println("infoview, call dic: " + curmonth[:month]);
-        //         opttest2 = {:year => dummyyr, :month => dummymm, :day => 1};
-        //         var testmon1 = Gregorian.moment(curmonth);
-        //         var testmon2 = Gregorian.moment(opttest2);
-        //         System.println("in infoview, month value: " + testmon1.subtract(testmon2).value()/86400); //obj: 202
-        //         // System.println("infoview, call dic: " + curmonth[:month]);
-        //         monthcount += 1;
-        //         mm += 1;
-        //         System.println("infoview, monthcount: " + monthcount);
-        //     }
-        // }
          
     }
 
