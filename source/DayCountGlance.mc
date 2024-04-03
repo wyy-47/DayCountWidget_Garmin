@@ -29,7 +29,6 @@ class dayCountGlanceView extends WatchUi.GlanceView {
         var dh = dc.getHeight();
         gDate = Storage.getValue("glance");
         if (gDate == null){
-            System.println("this is glance dc width: " + dc.getWidth());
             System.println("this is glance : " );
             dc.drawText (dw/2, dh/2-(dy/2), Graphics.FONT_TINY, "Empty", Graphics.TEXT_JUSTIFY_CENTER);
         }else{
